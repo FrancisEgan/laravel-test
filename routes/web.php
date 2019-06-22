@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resources([
+    'users' => 'UserController',
+    'user_roles' => 'UserRoleController',
+    'user_addresses' => 'UserAddressController'
+]);
