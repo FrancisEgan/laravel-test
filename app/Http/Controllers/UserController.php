@@ -15,6 +15,13 @@ class UserController extends Controller
     public function index()
     {
         //
+        $title = 'Users';
+        $data = User::all();
+        $display_fields = [
+            'username' => 'Username', 
+            'email' => 'Email'
+        ];
+        return view('object_table', compact('title', 'data', 'display_fields'));
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\UserAddress;
 
 class UserAddressController extends Controller
 {
@@ -14,6 +15,13 @@ class UserAddressController extends Controller
     public function index()
     {
         //
+        $title = 'User Addresses';
+        $data = UserAddress::all();
+        $display_fields = [
+            'user_id' => 'User ID', 
+            'address' => 'Address'
+        ];
+        return view('object_table', compact('title', 'data', 'display_fields'));
     }
 
     /**

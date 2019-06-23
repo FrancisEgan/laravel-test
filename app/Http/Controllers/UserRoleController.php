@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\UserRole;
 
 class UserRoleController extends Controller
 {
@@ -14,6 +15,13 @@ class UserRoleController extends Controller
     public function index()
     {
         //
+        $title = 'User Roles';
+        $data = UserRole::all();
+        $display_fields = [
+            'id' => 'Role ID', 
+            'label' => 'Label'
+        ];
+        return view('object_table', compact('title', 'data', 'display_fields'));
     }
 
     /**
