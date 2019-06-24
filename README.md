@@ -11,13 +11,13 @@ API endpoints are the same for all objects. Their routes are /users, /user_roles
 
 Note: For update, send body as `x-www-form-urlencoded`
 
-#Create:
+### Create:
 POST /users
 * accepts db fields for user
 * creates user and stores
 * returns user
 
-#Read:
+### Read:
 GET /users
 * returns all users
 
@@ -25,14 +25,14 @@ GET /users/{id}
 * URL contains id of user
 * returns user matching id
 
-#Update:
+### Update:
 PUT /users/{id}
 * URL contains id of user
 * accepts db fields for user
 * updates user in db
 * returns user
 
-#Delete
+### Delete
 DELETE /users/{id}
 * URL contains id of user
 * deletes user
