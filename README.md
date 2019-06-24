@@ -7,33 +7,33 @@ Make sure to install NPM and composer packages
 
 ## API Endpoints
 
-API endpoints are the same for all objects. Their routes are /users, /user_roles, /user_addresses
+API endpoints are the same for all objects. Their routes are /api/users, /api/user_roles, /api/user_addresses
 
 Note: For update, send body as `x-www-form-urlencoded`
 
 ### Create:
-POST /users
+POST /api/users
 * accepts db fields for user
 * creates user and stores
 * returns user
 
 ### Read:
-GET /users
+GET /api/users
 * returns all users
 
-GET /users/{id}
+GET /api/users/{id}
 * URL contains id of user
 * returns user matching id
 
 ### Update:
-PUT /users/{id}
+PUT /api/users/{id}
 * URL contains id of user
 * accepts db fields for user
 * updates user in db
 * returns user
 
 ### Delete
-DELETE /users/{id}
+DELETE /api/users/{id}
 * URL contains id of user
 * deletes user
 * returns 204 no content
