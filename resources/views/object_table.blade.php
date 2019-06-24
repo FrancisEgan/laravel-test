@@ -20,15 +20,21 @@
                 <td>{{ $d[$key] }}</td>
             @endforeach
                 <td>
-                    <a class="btn btn-primary" href="{{ URL::current() }}/show/{{ $d->id }}">Show</a>
-                    <a class="btn btn-primary" href="{{ URL::current() }}/edit/{{ $d->id }}">Edit</a>
-                    <a class="btn btn-primary" href="{{ URL::current() }}/delete/{{ $d->id }}">Delete</a>
+                    <a class="btn btn-primary" href="{{ URL::current() }}/{{ $d->id }}">Show</a>
+                    <a class="btn btn-primary" href="{{ URL::current() }}/{{ $d->id }}/edit">Edit</a>
+
+                    <form method="POST" action="{{ URL::current() }}/{{ $d->id }}" style="display:inline-block">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                        <input class="btn btn-primary" type="submit" value="Delete">
+                    </form>
                 </td>
             </tr>
         @endforeach
         </tbody>
     </table>
     <a class="btn btn-primary" href="{{ URL::current() }}/create">Create</a>
+    <a class="btn btn-secondary" href="/">Back</a>
 
 </div>
 @endsection
