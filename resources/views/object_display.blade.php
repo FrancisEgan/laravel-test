@@ -6,7 +6,7 @@
     <h2 class="page-title">{{ $title }}</h2>
     <table class="table table-striped">
         <tbody>
-        @foreach ($display_fields as $key => $value)
+        @foreach ($fields as $key => $value)
             <tr>
                 <td>{{ $value }}</td>
                 <td>{{ $object[$key] }}</td>

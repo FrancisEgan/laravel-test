@@ -14,13 +14,11 @@ class UserAddressController extends Controller
      */
     public function index()
     {
-        $title = 'User Addresses';
-        $data = UserAddress::all();
-        $display_fields = [
-            'user_id' => 'User ID', 
-            'address' => 'Address'
-        ];
-        return view('object_table', compact('title', 'data', 'display_fields'));
+        return view('object_table', [
+            'title' => 'User Addressses',
+            'data' => UserAddress::all(),
+            'fields' => UserAddress::INDEX_FIELDS
+        ]);
     }
 
     /**
@@ -30,19 +28,13 @@ class UserAddressController extends Controller
      */
     public function create()
     {
-        $object = new UserAddress();
-        $save_url = 'user_addresses.store';
-        $method = 'POST';
-        $title = 'Create User Address';
-        $display_fields = [
-            'user_id' => 'User Id',
-            'address' => 'Address',
-            'province' => 'Province',
-            'city' => 'City',
-            'country' => 'Country',
-            'postal_code' => 'Postal Code'
-        ];
-        return view('object_create_edit', compact('object', 'save_url', 'method', 'title', 'display_fields'));
+        return view('object_create_edit', [
+            'object' => new UserAddress(),
+            'save_url' => 'user_addresses.store',
+            'method' => 'POST',
+            'title' => 'Create User Addresss',
+            'fields' => UserAddress::EDITABLE_FIELDS
+        ]);
     }
 
     /**
@@ -53,14 +45,7 @@ class UserAddressController extends Controller
      */
     public function store(Request $request)
     {
-        $user_address = new UserAddress();
-        $user_address->user_id = $request->user_id;
-        $user_address->address = $request->address;
-        $user_address->province = $request->province;
-        $user_address->city = $request->city;
-        $user_address->country = $request->country;
-        $user_address->postal_code = $request->postal_code;
-        $user_address->save();
+        UserAddress::create($request->all());
         return redirect('user_addresses');
     }
 
@@ -73,17 +58,11 @@ class UserAddressController extends Controller
     public function show($id)
     {
         $object = UserAddress::findorfail($id);
-        $title = 'User Address ' . $object->id;
-        $display_fields = [
-            'id' => 'Id',
-            'user_id' => 'User Id',
-            'address' => 'Address',
-            'province' => 'Province',
-            'city' => 'City',
-            'country' => 'Country',
-            'postal_code' => 'Postal Code'
-        ];
-        return view('object_display', compact('object', 'title', 'display_fields'));
+        return view('object_display', [
+            'object' => $object,
+            'title' => 'User Addresss ' . $object->id,
+            'fields' => UserAddress::SHOW_FIELDS
+        ]);
     }
 
     /**
@@ -95,18 +74,13 @@ class UserAddressController extends Controller
     public function edit($id)
     {
         $object = UserAddress::findorfail($id);
-        $save_url = 'user_addresses.update';
-        $method = 'PUT';
-        $title = 'Edit User Address ' . $object->id;
-        $display_fields = [
-            'user_id' => 'User Id',
-            'address' => 'Address',
-            'province' => 'Province',
-            'city' => 'City',
-            'country' => 'Country',
-            'postal_code' => 'Postal Code'
-        ];
-        return view('object_create_edit', compact('object', 'save_url', 'method', 'title', 'display_fields'));
+        return view('object_create_edit', [
+            'object' => $object,
+            'save_url' => 'user_addresses.update',
+            'method' => 'PUT',
+            'title' => 'Edit User Addresss ' . $object->id,
+            'fields' => UserAddress::EDITABLE_FIELDS
+        ]);
     }
 
     /**
@@ -118,14 +92,8 @@ class UserAddressController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user_address = UserAddress::findorfail($id);
-        $user_address->user_id = $request->user_id;
-        $user_address->address = $request->address;
-        $user_address->province = $request->province;
-        $user_address->city = $request->city;
-        $user_address->country = $request->country;
-        $user_address->postal_code = $request->postal_code;
-        $user_address->save();
+        $user_role = UserAddress::findorfail($id);
+        $user_role->update($request->all());
         return redirect('user_addresses');
     }
 
@@ -137,8 +105,8 @@ class UserAddressController extends Controller
      */
     public function destroy($id)
     {
-        $user_address = UserAddress::findorfail($id);
-        $user_address->delete();
+        $user_role = UserAddress::findorfail($id);
+        $user_role->delete();
         return redirect('user_addresses');
     }
 }

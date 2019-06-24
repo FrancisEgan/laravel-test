@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-6">
             {!! Form::model($object, array('method' => $method, 'route' => array($save_url, $object->id))) !!}
-            @foreach ($display_fields as $key => $value)
+            @foreach ($fields as $key => $value)
             <div class="form-group">
                 <?= Form::label($key, $value) ?>
                 <?= Form::text($key, null, ['class' => 'form-control']) ?>

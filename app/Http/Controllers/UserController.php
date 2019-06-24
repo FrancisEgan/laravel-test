@@ -14,13 +14,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        $title = 'Users';
-        $data = User::all();
-        $display_fields = [
-            'username' => 'Username', 
-            'email' => 'Email'
-        ];
-        return view('object_table', compact('title', 'data', 'display_fields'));
+        return view('object_table', [
+            'title' => 'Users',
+            'data' => User::all(),
+            'fields' => User::INDEX_FIELDS
+        ]);
     }
 
     /**
@@ -30,15 +28,13 @@ class UserController extends Controller
      */
     public function create()
     {
-        $object = new User();
-        $save_url = 'users.store';
-        $method = 'POST';
-        $title = 'Create User';
-        $display_fields = [
-            'username' => 'Username',
-            'email' => 'Email'
-        ];
-        return view('object_create_edit', compact('object', 'save_url', 'method', 'title', 'display_fields'));
+        return view('object_create_edit', [
+            'object' => new User(),
+            'save_url' => 'users.store',
+            'method' => 'POST',
+            'title' => 'Create User',
+            'fields' => User::EDITABLE_FIELDS
+        ]);
     }
 
     /**
@@ -49,10 +45,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User();
-        $user->username = $request->username;
-        $user->email = $request->email;
-        $user->save();
+        User::create($request->all());
         return redirect('users');
     }
 
@@ -65,15 +58,11 @@ class UserController extends Controller
     public function show($id)
     {
         $object = User::findorfail($id);
-        $title = 'User ' . $object->username;
-        $display_fields = [
-            'id' => 'Id',
-            'username' => 'Username', 
-            'email' => 'Email',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At'
-        ];
-        return view('object_display', compact('object', 'title', 'display_fields'));
+        return view('object_display', [
+            'object' => $object,
+            'title' => 'User ' . $object->username,
+            'fields' => User::SHOW_FIELDS
+        ]);
     }
 
     /**
@@ -85,14 +74,13 @@ class UserController extends Controller
     public function edit($id)
     {
         $object = User::findorfail($id);
-        $save_url = 'users.update';
-        $method = 'PUT';
-        $title = 'Edit User ' . $object->username;
-        $display_fields = [
-            'username' => 'Username',
-            'email' => 'Email'
-        ];
-        return view('object_create_edit', compact('object', 'save_url', 'method', 'title', 'display_fields'));
+        return view('object_create_edit', [
+            'object' => $object,
+            'save_url' => 'users.update',
+            'method' => 'PUT',
+            'title' => 'Edit User ' . $object->username,
+            'fields' => User::EDITABLE_FIELDS
+        ]);
     }
 
     /**
@@ -105,9 +93,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findorfail($id);
-        $user->username = $request->username;
-        $user->email = $request->email;
-        $user->save();
+        $user->update($request->all());
         return redirect('users');
     }
 

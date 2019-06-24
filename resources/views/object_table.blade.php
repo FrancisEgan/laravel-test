@@ -7,7 +7,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
-            @foreach ($display_fields as $key => $value)
+            @foreach ($fields as $key => $value)
                 <th scope="col">{{ $value }}</th>
             @endforeach
                 <th scope="col">Actions</th>
@@ -16,7 +16,7 @@
         <tbody>
         @foreach ($data as $d)
             <tr>
-            @foreach ($display_fields as $key => $value)
+            @foreach ($fields as $key => $value)
                 <td>{{ $d[$key] }}</td>
             @endforeach
                 <td>
